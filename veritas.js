@@ -9,7 +9,7 @@ async function escanear() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer sk-tu-api-key' // OBTÉN TU KEY GRATIS
+                'Authorization': 'sk-fc0f5a7667fc4de28981cc029fb70819' // OBTÉN TU KEY GRATIS
             },
             body: JSON.stringify({
                 model: "deepseek-chat",
