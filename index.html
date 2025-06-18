@@ -1,11 +1,26 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Veritas - Escáner Ético</title>
-  </head>
-  <body>
-    <h1>¡VERITAS FUNCIONA! 🎉</h1>
-    <p>El escáner ético está en camino.</p>
-    <script src="app.js"></script>
-  </body>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>VERITAS 🔍</h1>
+        <p>El escáner ético universal</p>
+        
+        <div class="scanner">
+            <input type="text" id="entidad" placeholder="Escribe un partido, marca o persona...">
+            <button onclick="escanear()">Analizar</button>
+        </div>
+        
+        <div id="resultado">
+            <!-- Los resultados aparecerán aquí -->
+        </div>
+    </div>
+
+    <script src="veritas.js"></script>
+</body>
 </html>
