@@ -1,0 +1,1 @@
+git clone https://github.com/Veritas-Ethica/Base-Funcional.git
