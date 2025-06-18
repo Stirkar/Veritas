@@ -1,42 +1,37 @@
-function escanear() {
+async function escanear() {
     const entidad = document.getElementById('entidad').value;
     const resultadoDiv = document.getElementById('resultado');
     
-    if (!entidad) {
-        resultadoDiv.innerHTML = '<p class="error">⚠️ Por favor ingresa un nombre para analizar</p>';
-        return;
-    }
+    resultadoDiv.innerHTML = '<div class="cargando">🔍 Analizando con IA ética...</div>';
     
-    // Resultado de ejemplo (luego lo conectaremos a bases de datos reales)
-    resultadoDiv.innerHTML = `
-        <h2>Resultados para: ${entidad}</h2>
-        <div class="puntuacion">
-            <span class="score">7.2</span>/10
-        </div>
+    try {
+        const respuesta = await fetch('https://api.deepseek.com/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer sk-tu-api-key' // OBTÉN TU KEY GRATIS
+            },
+            body: JSON.stringify({
+                model: "deepseek-chat",
+                messages: [
+                    {
+                        role: "system",
+                        content: "Eres el motor ético de VERITAS. Analiza esta entidad y devuelve SOLO JSON con: {score: number, pros: [string], cons: [string], alternativas: [string], fuentes: [url]}"
+                    },
+                    {
+                        role: "user",
+                        content: `Analiza éticamente a ${entidad} usando fuentes actualizadas.`
+                    }
+                ],
+                temperature: 0.3
+            })
+        });
         
-        <div class="seccion">
-            <h3>✅ Aspectos positivos</h3>
-            <ul>
-                <li>Transparencia en financiación</li>
-                <li>Políticas ambientales activas</li>
-                <li>Salarios justos en sede central</li>
-            </ul>
-        </div>
+        const data = await respuesta.json();
+        const resultado = JSON.parse(data.choices[0].message.content);
+        mostrarResultado(resultado);
         
-        <div class="seccion">
-            <h3>⚠️ Áreas de mejora</h3>
-            <ul>
-                <li>Falta de auditoría en cadena de suministro</li>
-                <li>Vínculos con paraísos fiscales</li>
-            </ul>
-        </div>
-        
-        <div class="seccion">
-            <h3>💡 Alternativas éticas</h3>
-            <ul>
-                <li>Empresa Ejemplar S.A. (9.1/10)</li>
-                <li>Proyecto Sostenible SL (8.7/10)</li>
-            </ul>
-        </div>
-    `;
+    } catch (error) {
+        resultadoDiv.innerHTML = `<p class="error'>Error: ${error.message}</p>`;
+    }
 }
