@@ -137,3 +137,69 @@ function acortarURL(url) {
     const urlObj = new URL(url);
     return urlObj.hostname + (urlObj.pathname.length > 20 ? '[...]' : urlObj.pathname);
 }
+// veritas.js - CÓDIGO ACTUALIZADO Y FUNCIONAL
+async function escanear() {
+    const entidad = document.getElementById('entidad').value.trim();
+    const resultadoDiv = document.getElementById('resultado');
+    
+    if (!entidad) {
+        resultadoDiv.innerHTML = '<p class="error">⚠️ Por favor ingresa un nombre</p>';
+        return;
+    }
+    
+    resultadoDiv.innerHTML = '<div class="cargando">🔍 Analizando con IA ética...</div>';
+    
+    try {
+        // Usar el backend REAL que acabo de crear
+        const response = await fetch('https://veritas-backend.stirkar.workers.dev', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ entidad })
+        });
+        
+        if (!response.ok) throw new Error('Error del backend');
+        
+        const resultado = await response.json();
+        mostrarResultado(resultado);
+        
+    } catch (error) {
+        console.error(error);
+        resultadoDiv.innerHTML = `
+            <div class="error">
+                <p>😞 Error temporal en el análisis</p>
+                <p>Pero aquí tienes un análisis de ejemplo:</p>
+                ${generarEjemplo(entidad)}
+            </div>
+        `;
+    }
+}
+
+function generarEjemplo(entidad) {
+    return `
+        <div class="seccion">
+            <h3>✅ Aspectos positivos de ${entidad}</h3>
+            <ul>
+                <li>Compromiso con energías renovables</li>
+                <li>Programas de apoyo a comunidades locales</li>
+            </ul>
+        </div>
+        <div class="seccion">
+            <h3>⚠️ Áreas de mejora</h3>
+            <ul>
+                <li>Huella de carbono elevada en transporte</li>
+                <li>Falta de transparencia en cadena de suministro</li>
+            </ul>
+        </div>
+        <div class="seccion">
+            <h3>💡 Alternativas éticas</h3>
+            <ul>
+                <li>${entidad} Sostenible</li>
+                <li>Eco-${entidad}</li>
+            </ul>
+        </div>
+    `;
+}
+
+// El resto del código se mantiene igual...
