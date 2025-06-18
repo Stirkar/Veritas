@@ -5,12 +5,12 @@ body {
     margin: 0;
     padding: 20px;
     min-height: 100vh;
+    text-align: center;
 }
 
 .container {
     max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
+    margin: 50px auto;
     padding: 40px 20px;
     background: rgba(0, 0, 0, 0.7);
     border-radius: 15px;
@@ -31,10 +31,12 @@ p {
 
 .scanner {
     margin: 40px 0;
+    display: flex;
+    justify-content: center;
 }
 
 input {
-    width: 70%;
+    width: 60%;
     padding: 15px;
     font-size: 1.1rem;
     border: none;
@@ -59,8 +61,60 @@ button:hover {
 
 #resultado {
     margin-top: 40px;
-    padding: 20px;
+    padding: 30px;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
     text-align: left;
+}
+
+.seccion {
+    margin-bottom: 25px;
+}
+
+.seccion h3 {
+    border-bottom: 2px solid;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.seccion:nth-child(1) h3 {
+    color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.seccion:nth-child(2) h3 {
+    color: #FFC107;
+    border-color: #FFC107;
+}
+
+.seccion:nth-child(3) h3 {
+    color: #2196F3;
+    border-color: #2196F3;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.puntuacion {
+    font-size: 1.8rem;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.score {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.error {
+    color: #ff6b6b;
+    text-align: center;
+    font-weight: bold;
 }
